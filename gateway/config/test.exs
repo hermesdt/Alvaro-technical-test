@@ -10,5 +10,8 @@ config :gateway, GatewayWeb.Endpoint,
 config :gateway, Gateway.ZombieClient,
   http_driver: Gateway.HttpcMock
 
+config :gateway,
+  service_config: "test/config.yaml"
+
 # Print only warnings and errors during test
 config :logger, level: :warn

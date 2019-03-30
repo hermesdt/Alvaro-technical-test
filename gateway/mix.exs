@@ -49,7 +49,8 @@ defmodule Gateway.MixProject do
       {:confex, "~> 3.4.0"},
       {:mix_test_watch, "~> 0.8", only: :dev, runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
-      {:mox, "~> 0.5", only: :test}
+      {:mox, "~> 0.5", only: :test},
+      {:yaml_elixir, "~> 2.2"}
     ]
   end
 end

@@ -24,6 +24,8 @@ config :gateway, Gateway.ZombieClient,
     port: {:system, :integer, "ZOMBIE_SERVICE_PORT", "4001"}
   ]
 
+config :gateway,
+  service_config: "config.yaml"
 
 # Configures Elixir's Logger
 config :logger, :console,
