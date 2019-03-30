@@ -17,6 +17,14 @@ config :gateway, GatewayWeb.Endpoint,
 config :gateway, Gateway.NsqProducer,
   nsqds: ["127.0.0.1:4150"]
 
+config :gateway, Gateway.ZombieClient,
+  http_driver: :httpc,
+  zombie_service: [
+    host: {:system, :string, "ZOMBIE_SERVICE_HOST", "localhost"},
+    port: {:system, :integer, "ZOMBIE_SERVICE_PORT", "4001"}
+  ]
+
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -2,14 +2,10 @@ defmodule GatewayWeb.DriverController do
   use GatewayWeb, :controller
   
   def show(conn, %{"id" => driver_id}) do
-    {:ok, response} = :httpc.request(get_url(driver_id))
-    {_status, _headers, body} = response
+    {:ok, body} = Gateway.ZombieClient.get(driver_id)
 
-    send_resp(conn, 200, body)
-  end
-
-  def get_url(driver_id) do
-    # '#{config()[:driver_locations_host]}/drivers/#{driver_id}'
-    'http://localhost:4001/drivers/#{driver_id}'
+    conn
+    |> put_resp_header("content-type", "application/json")
+    |> send_resp(200, body)
   end
 end
