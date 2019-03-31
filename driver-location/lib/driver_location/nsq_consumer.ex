@@ -14,7 +14,8 @@ defmodule DriverLocation.NsqConsumer do
       end
 
       def init(_) do
-        {:ok, consumer} = NSQ.Consumer.Supervisor.start_link(topic(), channel(), %NSQ.Config{
+        topic = unquote(config()[:topic_prefix]) <> topic()
+        {:ok, consumer} = NSQ.Consumer.Supervisor.start_link(topic, channel(), %NSQ.Config{
           nsqds: unquote(config())[:nsqds],
           message_handler: &@name.handle_message/2
         })

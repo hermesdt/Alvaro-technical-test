@@ -5,12 +5,11 @@ defmodule DriverLocation.NsqConsumers.Locations do
 
   subscribe("locations", "driver_location")
 
-  def handle_message(json_body, _msg = %NSQ.Message{}) do
+  def handle_message(json_body, _msg = %NSQ.Message{}, now \\ DateTime.now("Etc/UTC")) do
     {:ok, body} = Jason.decode(json_body)
-    IO.inspect(body)
     %{"id" => driver_id, "latitude" => latitude, "longitude" => longitude} = body
 
-    {:ok, updated_at} = DateTime.now("Etc/UTC")
+    {:ok, updated_at} = now
     location_info = %{
       "latitude" => latitude,
       "longitude" => longitude,

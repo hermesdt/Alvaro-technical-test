@@ -14,10 +14,17 @@ config :driver_location, DriverLocationWeb.Endpoint,
   render_errors: [view: DriverLocationWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: DriverLocation.PubSub, adapter: Phoenix.PubSub.PG2]
 
-config :driver_location, DriverLocation.NsqConsumer,
-  nsqds: {:system, :list, "NSQD_HOSTS", ["127.0.0.1:4150"]}
+config :driver_location,
+  redis_driver: Exredis.Api,
+  date_time: DateTime
 
-config :exredis, url: {:system, "REDIS_URL"}, max_queue: :infinity
+config :driver_location, DriverLocation.NsqConsumer,
+  nsqds: {:system, :list, "NSQD_HOSTS", ["127.0.0.1:4150"]},
+  topic_prefix: ""
+
+config :exredis,
+  url: System.get_env("REDIS_URL") || "localhost:6379/1",
+  max_queue: :infinity
 
 # Configures Elixir's Logger
 config :logger, :console,

@@ -13,8 +13,14 @@ defmodule DriverLocationWeb.LocationsController do
     _index(conn, driver_id, String.to_integer(n), :seconds)
   end
 
+  def index(conn, _params) do
+    conn
+    |> put_status(400)
+    |> json(%{"error" => "missing query parameters"})
+  end
+
   def _index(conn, driver_id, seconds, :seconds) do
-    {:ok, end_time} = DateTime.now("Etc/UTC")
+    {:ok, end_time} = now()
     start_time = DateTime.add(end_time, -seconds, :second)
 
     start_time = DateTime.to_unix(start_time, :millisecond)
@@ -24,5 +30,9 @@ defmodule DriverLocationWeb.LocationsController do
 
     conn
     |> json(locations)
+  end
+
+  defp now() do
+    Application.get_env(:driver_location, :date_time).now("Etc/UTC")
   end
 end

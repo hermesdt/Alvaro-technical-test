@@ -9,7 +9,9 @@ defmodule DriverLocation.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
     ]
   end
 
@@ -46,7 +48,9 @@ defmodule DriverLocation.MixProject do
       {:exredis, ">= 0.2.4"},
       {:confex, "~> 3.4.0"},
       {:elixir_nsq, "~> 1.1.0"},
-      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:mox, "~> 0.5", only: :test},
     ]
   end
 end
