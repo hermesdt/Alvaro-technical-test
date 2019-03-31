@@ -9,3 +9,8 @@ urls:
     method: "GET"
     http:
       host: "zombie-driver"
+  -
+    path: "/drivers"
+    method: "POST"
+    http:
+      host: "driver"

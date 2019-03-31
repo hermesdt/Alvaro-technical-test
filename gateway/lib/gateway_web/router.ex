@@ -1,6 +1,8 @@
 defmodule GatewayWeb.Router do
   use GatewayWeb, :router
 
+  @service_config_file Application.get_env(:gateway, :service_config)
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -8,7 +10,7 @@ defmodule GatewayWeb.Router do
   scope "/", GatewayWeb do
     pipe_through :api
 
-    {:ok, urls} = Gateway.ServiceConfig.read("config.yaml")
+    {:ok, urls} = Gateway.ServiceConfig.read(@service_config_file)
 
     urls
     |> Enum.each(fn

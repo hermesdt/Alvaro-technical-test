@@ -1,6 +1,5 @@
 defmodule Gateway.ServiceConfig do
 
-  @spec read(String.t) :: {:ok, [map()]} | {:error, %{message: String.t}}
   def read(filename) do
     case YamlElixir.read_from_file(filename) do
       {:ok, %{"urls" => urls}} ->
