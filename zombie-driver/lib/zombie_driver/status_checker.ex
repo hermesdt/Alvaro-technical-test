@@ -4,12 +4,18 @@ defmodule ZombieDriver.StatusChecker do
   alias ZombieDriver.DriverLocationsClient
 
   def is_zombie(driver_id) do
-    distance = get_locations(driver_id)
-    |> convert_updated_at()
-    |> sort_by_updated_at()
-    |> calculate_distance()
+    case get_locations(driver_id) do
+      {:ok, locations} ->
+        distance = locations
+        |> convert_updated_at()
+        |> sort_by_updated_at()
+        |> calculate_distance()
 
-    if distance < zombie_distance(), do: true, else: false
+        is_zombie = if distance < zombie_distance(), do: true, else: false
+        {:ok, is_zombie}
+
+      {:error, error} -> {:error, error}
+    end    
   end
 
   def get_locations(driver_id) do

@@ -3,7 +3,15 @@ defmodule DriverLocation.RedisClient do
 
   def add_location(driver_id, timestamp, value) do
     {:ok, json_value} = Jason.encode(value)
-    "1" = zadd("drivers:#{driver_id}:locations", timestamp, json_value)
+
+    case zadd("drivers:#{driver_id}:locations", timestamp, json_value) do
+      "1" -> {:ok, "1"}
+      {:error, error} -> {:error, error}
+      all ->
+        IO.inspect(all)
+        all
+    
+    end
   end
 
   def locations(driver_id, start_time, end_time) do

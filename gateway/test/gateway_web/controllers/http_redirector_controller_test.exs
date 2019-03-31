@@ -1,4 +1,4 @@
-defmodule GatewayWeb.DriverControllerTest do
+defmodule GatewayWeb.HttpRedirectorControllerTest do
   use GatewayWeb.ConnCase, async: true
 
   import Mox

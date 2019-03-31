@@ -11,5 +11,9 @@ defmodule Gateway.HttpcBehaviour do
   @typep headers :: [header]
   @typep result :: {status_line, headers, body}
   @typep reason :: term
-  @callback request(url) :: {:ok, result} | {:error, reason}
+  @typep method :: term
+  @typep content_type :: String.t
+  
+  @callback request(:get, url) :: {:ok, result} | {:error, reason}
+  @callback request(method, url, headers, content_type, body) :: {:ok, result} | {:error, reason}
 end

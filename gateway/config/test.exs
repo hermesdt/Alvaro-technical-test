@@ -7,7 +7,7 @@ config :gateway, GatewayWeb.Endpoint,
   server: false
 
 
-config :gateway, Gateway.ZombieClient,
+config :gateway, Gateway.HttpClient,
   http_driver: Gateway.HttpcMock
 
 config :gateway,

@@ -2,11 +2,12 @@ defmodule ZombieDriver.DriverLocationsClient do
   use Confex, otp_app: :zombie_driver
 
   def get_locations(driver_id, unit, amount) do
-    {:ok, response} = :httpc.request(get_url(driver_id, unit, amount))
-    {_status, _headers, json_locations} = response
-    {:ok, locations} = json_locations |> Jason.decode
-
-    locations
+    case :httpc.request(get_url(driver_id, unit, amount)) do
+      {:ok, response} ->
+        {{_http_version, 200, _reason}, _headers, json_locations} = response
+        Jason.decode(json_locations)
+      {:error, error} -> {:error, error}
+    end
   end
 
   def get_url(driver_id, unit, amount) do

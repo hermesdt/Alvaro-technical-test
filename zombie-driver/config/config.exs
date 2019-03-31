@@ -20,7 +20,7 @@ config :zombie_driver, ZombieDriver.StatusChecker,
   zombie_distance_meters: {:system, :integer, "ZOMBIE_DISTANCE_METERS", 500}
 
 config :zombie_driver, ZombieDriver.DriverLocationsClient,
-  driver_locations_host: {:system, :string, "DRIVER_LOCATIONS_HOST", "http://localhost:4000"}
+  driver_locations_host: {:system, :string, "DRIVER_LOCATIONS_HOST", "http://localhost:4001"}
 
 # Configures Elixir's Logger
 config :logger, :console,

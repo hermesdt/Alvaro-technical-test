@@ -46,6 +46,7 @@ defmodule DriverLocation.MixProject do
       {:exredis, ">= 0.2.4"},
       {:confex, "~> 3.4.0"},
       {:elixir_nsq, "~> 1.1.0"},
+      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false}
     ]
   end
 end
