@@ -9,7 +9,7 @@ defmodule ZombieDriverWeb.ZombiesController do
       {:error, error} ->
         conn
         |> put_status(500)
-        |> json(%{"error" => inspect(error)})
+        |> json(%{"error" => error})
     end
   end
 end

@@ -41,17 +41,17 @@ defmodule ZombieDriverWeb.ZombiesControllerTest do
     ZombieDriver.HttpcMock
     |> expect(:request, fn(:get, {_url, _headers}, [], []) ->
 
-      {:ok, json_message} = zombie_locations() |> Jason.encode
+      body = ""
       headers = [{"content-type", "application/json"}]
-      response = {{"HTTP/1.1", 200, "OK"}, headers, json_message}
+      response = {{"HTTP/1.1", 500, "OK"}, headers, body}
       {:ok, response}
     end)
 
     message = conn
     |> get("/drivers/1")
-    |> json_response(200)
+    |> json_response(500)
 
-    assert message == %{"id" => 1, "zombie" => true}
+    assert message == %{"error" => "unexpected answer from driver_location service"}
   end
 
   defp locations() do

@@ -7,7 +7,7 @@ defmodule Gateway.HttpClient do
   @http_driver Application.get_env(:gateway, Gateway.HttpClient)[:http_driver]
 
   def request(:get, url, headers) do
-    Logger.info("requesting :get, #{inspect url}, #{inspect headers}")
+    log(:info, "requesting :get, #{inspect url}, #{inspect headers}")
 
     url = to_charlist(url)
     headers = convert_headers(headers)
@@ -16,8 +16,8 @@ defmodule Gateway.HttpClient do
   end
 
   def request(method, url, headers, content_type, body) when method in @requests_with_body do
-    Logger.info("requesting #{inspect method}, #{inspect url}, #{inspect headers}")
-    Logger.debug("with body: #{inspect body}")
+    log(:info, "requesting #{inspect method}, #{inspect url}, #{inspect headers}")
+    log(:debug, "with body: #{inspect body}")
 
     url = to_charlist(url)
     headers = convert_headers(headers)
@@ -39,4 +39,7 @@ defmodule Gateway.HttpClient do
       {to_charlist(key), to_charlist(value)}
     end)
   end
+
+  defp log(:info, msg), do: Logger.info("#{__MODULE__}: #{msg}")
+  defp log(:debug, msg), do: Logger.debug("#{__MODULE__}: #{msg}")
 end
