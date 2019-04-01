@@ -5,6 +5,11 @@ all:
 	make -C ./gateway
 	make -C ./zombie-driver
 
+setup:
+	make -C ./driver-location setup
+	make -C ./gateway setup
+	make -C ./zombie-driver setup
+
 test:
 	make -C ./driver-location test
 	make -C ./gateway test
