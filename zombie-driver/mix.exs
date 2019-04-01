@@ -9,7 +9,9 @@ defmodule ZombieDriver.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
     ]
   end
 
@@ -42,7 +44,10 @@ defmodule ZombieDriver.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:confex, "~> 3.4.0"},
-      {:distance, "~> 0.2.1"}
+      {:distance, "~> 0.2.1"},
+      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:mox, "~> 0.5", only: :test},
     ]
   end
 end

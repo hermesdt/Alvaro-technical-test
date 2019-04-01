@@ -22,6 +22,9 @@ config :zombie_driver, ZombieDriver.StatusChecker,
 config :zombie_driver, ZombieDriver.DriverLocationsClient,
   driver_locations_host: {:system, :string, "DRIVER_LOCATIONS_HOST", "http://localhost:4001"}
 
+config :zombie_driver,
+  http_driver: :httpc
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

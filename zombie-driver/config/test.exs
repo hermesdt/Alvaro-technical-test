@@ -6,5 +6,8 @@ config :zombie_driver, ZombieDriverWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :zombie_driver,
+  http_driver: ZombieDriver.HttpcMock
+
 # Print only warnings and errors during test
 config :logger, level: :warn
