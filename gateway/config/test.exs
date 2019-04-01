@@ -6,6 +6,9 @@ config :gateway, GatewayWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :gateway, Gateway.NsqProducer,
+  nsqds: ["127.0.0.1:4150"],
+  topic_prefix: "test."
 
 config :gateway, Gateway.HttpClient,
   http_driver: Gateway.HttpcMock

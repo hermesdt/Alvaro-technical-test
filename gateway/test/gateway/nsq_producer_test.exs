@@ -4,7 +4,7 @@ defmodule Gateway.NsqProducerTest do
   describe "#publish" do
     test "when calling publish a message is received in nsq" do
       test_pid = self()
-      {:ok, _consumer} = NSQ.Consumer.Supervisor.start_link("my-topic", "my-channel", %NSQ.Config{
+      {:ok, _consumer} = NSQ.Consumer.Supervisor.start_link("test.my-topic", "my-channel", %NSQ.Config{
         nsqds: Application.get_env(:gateway, Gateway.NsqProducer)[:nsqds],
         message_handler: fn(body, _msg) ->
           send(test_pid, {:nsq_message, body})
@@ -14,11 +14,8 @@ defmodule Gateway.NsqProducerTest do
 
       payload = "asdf"
       Gateway.NsqProducer.publish("my-topic", payload)
-      receive do
-        {:nsq_message, body} -> assert body == payload
-      after
-        400 -> raise "No message in 400 ms"
-      end
+
+      assert_receive {:nsq_message, ^payload}
     end
   end
 end

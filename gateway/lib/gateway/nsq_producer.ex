@@ -21,7 +21,11 @@ defmodule Gateway.NsqProducer do
   end
 
   def handle_cast({:publish, topic, message}, %{producer: producer}) do
-    {:ok, "OK"} = NSQ.Producer.pub(producer, topic, message)
+    {:ok, "OK"} = NSQ.Producer.pub(producer, topic(topic), message)
     {:noreply, %{producer: producer}}
+  end
+
+  defp topic(topic) do
+    config()[:topic_prefix] <> topic
   end
 end

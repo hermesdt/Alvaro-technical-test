@@ -15,7 +15,8 @@ config :gateway, GatewayWeb.Endpoint,
   pubsub: [name: Gateway.PubSub, adapter: Phoenix.PubSub.PG2]
 
 config :gateway, Gateway.NsqProducer,
-  nsqds: ["127.0.0.1:4150"]
+  nsqds: ["127.0.0.1:4150"],
+  topic_prefix: ""
 
 config :gateway, Gateway.HttpClient,
   http_driver: :httpc,
