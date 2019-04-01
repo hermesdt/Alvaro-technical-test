@@ -4,4 +4,5 @@ all:
 	# Write your build command(s) here
 
 test:
-	# Write your test command(s) here
+	echo "Running tests for ZOMBIE DRIVER"
+	mix coveralls
